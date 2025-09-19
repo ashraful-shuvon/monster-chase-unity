@@ -8,12 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveForce = 10f;
     [SerializeField] private float jumpForce = 11f;
     private float movementX;
+    private bool isGrounded;
 
     private Rigidbody2D myBody;
     private SpriteRenderer sr;
     private Animator anim;
 
     private string WALK_ANIMATION = "Walk";
+    private string GROUND_TAG = "Ground";
 
 
     private void Awake()
@@ -35,7 +37,10 @@ public class Player : MonoBehaviour
         playerAnimation();
         playerMoveKeyboard();
     }
-
+    private void FixedUpdate()
+    {
+        playerJump();
+    }
     void playerMoveKeyboard()
     {
         movementX = Input.GetAxisRaw("Horizontal");
@@ -47,14 +52,41 @@ public class Player : MonoBehaviour
         if (movementX > 0)
         {
             anim.SetBool(WALK_ANIMATION, true);
+            sr.flipX = false;
         }
         else if (movementX < 0)
         {
             anim.SetBool(WALK_ANIMATION, true);
+            sr.flipX = true;
         }
         else
         {
             anim.SetBool(WALK_ANIMATION, false);
         }
     }
+
+    void playerJump()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            isGrounded = false;
+            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(GROUND_TAG))
+        {
+            isGrounded = true;
+        }
+    }
+
+
+
+
+
+
+
+
 }

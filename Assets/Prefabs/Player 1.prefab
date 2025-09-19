@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4078407595999593680}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -193,3 +193,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1951645416e4e85a8162c73b318083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveForce: 10
+  jumpForce: 11
